@@ -2,154 +2,163 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday Vertika</title>
+<title>Happy New Year </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(to top, #ffdde1, #ee9ca7);
-  overflow: hidden;
-  font-family: 'Segoe UI', sans-serif;
-}
+    html, body {
+        margin:0; padding:0;
+        width:100%; height:100%;
+        overflow:hidden;
+        background:white;
+        font-family: "Poppins", sans-serif;
+    }
 
-/* Birthday Message */
-.message {
-  position: absolute;
-  top: 20px;
-  width: 100%;
-  text-align: center;
-  color: white;
-  opacity: 0;
-  transition: opacity 3s ease;
-  z-index: 5;
-}
+    #pink-area {
+        position:absolute;
+        top:0; left:0;
+        width:100%; height:100%;
+        pointer-events:none;
+    }
 
-.message h1 {
-  font-size: 34px;
-  margin: 0;
-  text-shadow: 2px 2px 5px #000;
-}
+    .heart {
+        position:absolute;
+        color:#ff4da6;
+        font-size:16px;
+        opacity:0;
+        transition:opacity 0.2s;
+    }
 
-.message p {
-  font-size: 17px;
-  margin: 6px 0;
-  text-shadow: 1px 1px 4px #000;
-}
+    .white-heart {
+        position:absolute;
+        color:white;
+        font-size:18px;
+        opacity:0;
+        transition:opacity 0.2s;
+    }
 
-/* SVG Tree */
-svg {
-  position: absolute;
-  bottom: -40px; /* pushes tree down */
-  width: 100%;
-  height: 100%;
-}
+    #gif {
+        position:absolute;
+        top:10px;
+        width:100%;
+        text-align:center;
+        z-index:5;
+        opacity:1;
+    }
 
-/* Tree drawing animation */
-.trunk, .branch {
-  fill: none;
-  stroke: #8b5a2b;
-  stroke-linecap: round;
-  stroke-dasharray: 1400;
-  stroke-dashoffset: 1400;
-  animation: drawTree 5s ease forwards;
-}
+    #gif img {
+        width:65%;
+        max-width:350px;
+    }
 
-.branch { animation-delay: 1.5s; }
+    #message {
+        position:absolute;
+        width:90%;
+        left:5%;
+        top:60%;
+        text-align:center;
+        font-size:19px;
+        color:white;
+        opacity:0;
+        transition:opacity 2.5s ease-in-out, font-weight 2s ease-in;
+    }
 
-/* Heart leaves */
-.leaf {
-  opacity: 0;
-  animation: showLeaf 0.3s forwards;
-}
-
-@keyframes drawTree {
-  to { stroke-dashoffset: 0; }
-}
-
-@keyframes showLeaf {
-  to { opacity: 1; }
-}
+    #message.bold {
+        font-weight:700;
+        text-shadow:0px 0px 8px rgba(255,255,255,0.75);
+    }
 </style>
 </head>
 
 <body>
 
-<div class="message" id="msg">
-  <h1>Happy Birthday Shabnam di </h1>
-  <p>May your life always bloom with happiness </p>
-  <p>— Yours lovingly, Nishant </p>
+<div id="gif">
+    <img src="https://www.wordsjustforyou.com/wp-content/uploads/2025/12/Happy-New-Year-2026-GIF-77703291225.gif">
 </div>
 
-<svg viewBox="0 0 360 640" preserveAspectRatio="xMidYMax meet">
-
-  <!-- Trunk (lowered & tall) -->
-  <path class="trunk"
-        d="M180 640 C145 500, 215 340, 180 220"
-        stroke-width="22"/>
-
-  <!-- 8 Curved Branches -->
-  <path class="branch" d="M180 420 C95 380, 70 330, 50 300" stroke-width="7"/>
-  <path class="branch" d="M180 420 C265 380, 290 330, 310 300" stroke-width="7"/>
-
-  <path class="branch" d="M180 360 C120 330, 105 285, 95 255" stroke-width="6"/>
-  <path class="branch" d="M180 360 C240 330, 255 285, 265 255" stroke-width="6"/>
-
-  <path class="branch" d="M180 310 C145 285, 135 245, 125 220" stroke-width="5"/>
-  <path class="branch" d="M180 310 C215 285, 225 245, 235 220" stroke-width="5"/>
-
-  <path class="branch" d="M180 270 C165 245, 155 220, 150 200" stroke-width="4"/>
-  <path class="branch" d="M180 270 C195 245, 205 220, 210 200" stroke-width="4"/>
-
-  <!-- Heart Leaves -->
-  <g id="leaves"></g>
-
-</svg>
-
-<audio id="bgMusic" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
+<div id="pink-area"></div>
+<div id="message">
+    this year 2025 was full of struggles for me ,<br>
+    but ur presence made it the most important and beautiful year of my life .<br>
+    Your presence is so so so special for me ....<br>
+    May god bless me to manifest at least 60 more new years with you ..<br><br>
+    I love you so much  ...<br>
+    <b>Happy new year sweetheart </b>
+</div>
 
 <script>
-/* Heart leaves attached to canopy */
-const colors = ["#ff4d4d","#ff66cc","#ffcc00","#66ff99","#66ccff","#ff9966","#cc66ff"];
-const leavesGroup = document.getElementById("leaves");
+let w = window.innerWidth;
+let h = window.innerHeight;
+let container = document.getElementById("pink-area");
 
-/* Canopy positioned LOWER so text stays clear */
-const centerX = 180;
-const centerY = 260;   // moved down
-const radius = 170;    // covers all branches
-
-let baseDelay = 3500;
-
-for (let i = 0; i < 200; i++) {
-  const angle = Math.random() * Math.PI * 2;
-  const r = radius * Math.sqrt(Math.random());
-
-  const x = centerX + r * Math.cos(angle);
-  const y = centerY + r * Math.sin(angle);
-
-  const heart = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  heart.setAttribute(
-    "d",
-    `M ${x} ${y}
-     c -5 -7 -14 -3 -14 5
-     c 0 7 14 14 14 14
-     s 14 -7 14 -14
-     c 0 -7 -9 -12 -14 -5`
-  );
-
-  heart.setAttribute("fill", colors[Math.floor(Math.random() * colors.length)]);
-  heart.setAttribute("class", "leaf");
-  heart.style.animationDelay = (baseDelay + i * 25) + "ms";
-
-  leavesGroup.appendChild(heart);
+// STEP 1 — Generate pink hearts (~2000)
+let total = 2000;
+let hearts = [];
+for(let i=0;i<total;i++){
+    let e = document.createElement("div");
+    e.className = "heart";
+    e.innerHTML = "";
+    e.style.left = Math.random()*w + "px";
+    e.style.top = Math.random()*h + "px";
+    container.appendChild(e);
+    hearts.push(e);
 }
 
-/* Show message after tree completes */
-setTimeout(() => {
-  document.getElementById("msg").style.opacity = 1;
-}, 11000);
+let i = 0;
+let interval = setInterval(()=>{
+    hearts[i].style.opacity = 1;
+    i++;
+    if(i >= hearts.length) {
+        clearInterval(interval);
+        createBorder();
+    }
+}, 2);  // HEART SPEED
+
+// STEP 2 — Create white heart border
+function createBorder(){
+    let borderHearts = [];
+    let size = 22; // spacing
+    // TOP
+    for(let x=0; x<w; x+=size){
+        borderHearts.push({x:x, y:0});
+    }
+    // RIGHT
+    for(let y=0; y<h; y+=size){
+        borderHearts.push({x:w-size, y:y});
+    }
+    // BOTTOM
+    for(let x=0; x<w; x+=size){
+        borderHearts.push({x:x, y:h-size});
+    }
+    // LEFT
+    for(let y=0; y<h; y+=size){
+        borderHearts.push({x:0, y:y});
+    }
+
+    let j = 0;
+    let interval2 = setInterval(()=>{
+        let p = borderHearts[j];
+        let e = document.createElement("div");
+        e.className = "white-heart";
+        e.innerHTML = "";
+        e.style.left = p.x + "px";
+        e.style.top = p.y + "px";
+        container.appendChild(e);
+        setTimeout(()=>{ e.style.opacity = 1; }, 20);
+        j++;
+        if(j >= borderHearts.length){
+            clearInterval(interval2);
+            showMessage();
+        }
+    }, 11); // BORDER SPEED
+}
+
+// STEP 3 — Message animation
+function showMessage(){
+    let msg = document.getElementById("message");
+    msg.style.opacity = 1; // fade
+    setTimeout(()=>{ msg.classList.add("bold"); }, 3000);
+}
 </script>
 
 </body>
